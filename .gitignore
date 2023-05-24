@@ -27,3 +27,5 @@ build/
 *.log
 *.bak
 *.swp
+
+venv/
