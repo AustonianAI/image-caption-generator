@@ -17,7 +17,7 @@ def initialize_model():
     hf_model = "Salesforce/blip-image-captioning-large"
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     processor = BlipProcessor.from_pretrained(hf_model)
-    model = BlipForConditionalGeneration.from_pretrained(hf_model).to(device)
+    model = BlipForConditionalGeneration.from_pretrained(hf_model).to(device) # type: ignore
     return processor, model, device
 
 def resize_image(image, max_width):
@@ -36,7 +36,9 @@ def generate_caption(processor, model, device, image):
 
 def main():
     set_page_config()
-    st.sidebar.header("Caption an Image :camera:")
+    st.header("Caption an Image :camera:")
+    # Add credit
+
 
     uploaded_image = upload_image()
 
@@ -45,8 +47,9 @@ def main():
         image = resize_image(image, max_width=500)
 
         st.image(image, caption='Your image')
-
+        
         with st.sidebar:
+            st.divider() 
             if st.sidebar.button('Generate Caption'):
                 with st.spinner('Generating caption...'):
                     processor, model, device = initialize_model()
@@ -54,7 +57,14 @@ def main():
                     st.header("Your Caption:")
                     st.markdown(f'**{caption}**')
 
-        
+
 
 if __name__ == '__main__':
     main()
+
+
+st.markdown("""
+    ---
+    Made with 🤖 by [Austin Johnson](https://github.com/AustonianAI)""")
+
+
