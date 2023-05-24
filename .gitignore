@@ -6,6 +6,8 @@ __pycache__/
 # Local development settings
 .env
 
+
+
 # IDE files
 .vscode/
 *.pydevproject
@@ -28,4 +30,6 @@ build/
 *.bak
 *.swp
 
+# Virtual Environments
 venv/
+env/
