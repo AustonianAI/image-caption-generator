@@ -15,7 +15,7 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 processor = BlipProcessor.from_pretrained(hf_model)
 
 # # then we initialize the model itself
-# model = BlipForConditionalGeneration.from_pretrained(hf_model).to(device)
+model = BlipForConditionalGeneration.from_pretrained(hf_model).to(device)  # type: ignore
 
 
 def main():
@@ -27,7 +27,7 @@ def main():
 
     st.sidebar.header("Caption an Image :camera:")
 
-    uploaded_image = st.sidebar.file_uploader("Upload an image (we aren't saving anything)", type=["jpg", "jpeg", "png"])
+    uploaded_image = st.sidebar.file_uploader("Upload an image (we aren't storing anything)", type=["jpg", "jpeg", "png"])
 
     if uploaded_image is not None:
         image = Image.open(uploaded_image)
@@ -40,10 +40,16 @@ def main():
             height = int(height * ratio)
             image = image.resize((max_width, height))
 
-        st.image(image, caption='Uploaded Image.')
+        st.image(image, caption='Your image')
 
         if st.button('Generate Caption'):
-            st.write('Caption: A dog is running in the grass.')
+            with st.spinner('Generating caption...'):
+                # unconditional image captioning
+                inputs = processor(image, return_tensors='pt').to(device)
+
+                out = model.generate(**inputs, max_new_tokens=20) # type: ignore
+                caption = processor.decode(out[0], skip_special_tokens=True)
+                st.write(caption)
 
 if __name__ == '__main__':
     main()
