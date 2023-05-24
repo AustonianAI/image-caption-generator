@@ -44,7 +44,7 @@ def main():
 
     if uploaded_image is not None:
         image = Image.open(uploaded_image)
-        image = resize_image(image, max_width=500)
+        image = resize_image(image, max_width=300)
 
         st.image(image, caption='Your image')
         
@@ -54,7 +54,7 @@ def main():
                 with st.spinner('Generating caption...'):
                     processor, model, device = initialize_model()
                     caption = generate_caption(processor, model, device, image)
-                    st.header("Your Caption:")
+                    st.header("Caption:")
                     st.markdown(f'**{caption}**')
 
 
