@@ -23,10 +23,10 @@ The Image Caption Generator is a demonstration of integrating the Salesforce/bli
 
 ### Steps
 
-1. Clone this repository: git clone https://github.com/AustonianAI/image-caption-generator.git
-2. Navigate to the project directory: cd image-caption-generator
-3. Install the necessary Python packages using the command pip install -r requirements.txt.
-4. Run the Streamlit app using the command streamlit run app.py.
+1. Clone this repository: ```git clone https://github.com/AustonianAI/image-caption-generator.git```
+2. Navigate to the project directory: ```cd image-caption-generator```
+3. Install the necessary Python packages using the command ```pip install -r requirements.txt```.
+4. Run the Streamlit app using the command ```streamlit run app.py```.
 
 ## Usage
 
