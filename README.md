@@ -1,4 +1,4 @@
-\# Image Caption Generator with Streamlit, Hugging Face, and PyTorch
+# Image Caption Generator with Streamlit, Hugging Face, and PyTorch
 
 This repository contains a simple yet powerful image captioning application built with Streamlit, Hugging Face's transformers, and PyTorch. The application generates a descriptive caption for any uploaded image.
 
