@@ -12,10 +12,6 @@ The Image Caption Generator is a demonstration of integrating the Salesforce/bli
 - **Hugging Face's Salesforce/blip-image-captioning-large:** A state-of-the-art image captioning AI model that generates the captions for the images.
 - **PyTorch:** A Python library used to load and interact with the pretrained AI model.
 
-## Demo App
-
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://image-caption-generator.streamlit.app/)
-
 ## How to Run
 
 ### Prerequisites
@@ -23,7 +19,7 @@ The Image Caption Generator is a demonstration of integrating the Salesforce/bli
 - Python 3.6 or higher
 - Streamlit
 - PyTorch
-- transformers
+- HuggingFace Transformers
 
 ### Steps
 

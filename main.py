@@ -10,6 +10,13 @@ def set_page_config():
         layout='wide',
     )
 
+def initialize_model():
+    hf_model = "Salesforce/blip-image-captioning-large"
+    device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    processor = BlipProcessor.from_pretrained(hf_model)
+    model = BlipForConditionalGeneration.from_pretrained(hf_model).to(device) # type: ignore
+    return processor, model, device
+
 def upload_image():
     return st.sidebar.file_uploader("Upload an image (we aren't storing anything)", type=["jpg", "jpeg", "png"])
 
@@ -31,12 +38,6 @@ def main():
     set_page_config()
     st.header("Caption an Image :camera:")
 
-    hf_model = "Salesforce/blip-image-captioning-large"
-    device = 'cuda' if torch.cuda.is_available() else 'cpu'
-    processor = BlipProcessor.from_pretrained(hf_model)
-    model = BlipForConditionalGeneration.from_pretrained(hf_model).to(device) # type: ignore
-
-
     uploaded_image = upload_image()
 
     if uploaded_image is not None:
@@ -49,6 +50,7 @@ def main():
             st.divider() 
             if st.sidebar.button('Generate Caption'):
                 with st.spinner('Generating caption...'):
+                    processor, model, device = initialize_model()
                     caption = generate_caption(processor, model, device, image)
                     st.header("Caption:")
                     st.markdown(f'**{caption}**')
